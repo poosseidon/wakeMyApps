@@ -209,8 +209,13 @@ class HealthCheckHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-Type', 'text/plain')
         self.send_header('Content-Length', str(len(content)))
-        self.end_headers() # Signalling the header details finished
-        self.wfile.write(content)        
+        self.end_headers()
+        self.wfile.write(content)
+
+    def do_HEAD(self) -> None:
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/plain')
+        self.end_headers()
         
 # Starting the health check server
 def start_health_checker() -> None:
