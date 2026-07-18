@@ -214,7 +214,8 @@ class HealthCheckHandler(BaseHTTPRequestHandler):
         
 # Starting the health check server
 def start_health_checker() -> None:
-    server_address = '0.0.0.0', 7860
+    port = int(os.environ.get('PORT', 10000))
+    server_address = '0.0.0.0', port
     server = HTTPServer(server_address, HealthCheckHandler)
     server.serve_forever()    
 
